@@ -1,0 +1,12 @@
+{
+  "name": "singlebrook/task_train",
+  "authors": [
+    {
+      "name": "Jeff Amaral",
+      "email": "jeff@singlebrook.com"
+    }
+  ],
+  "require": {
+    "react/react": "0.4.*"
+  }
+}
