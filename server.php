@@ -65,14 +65,15 @@ $app = function($request, $response) use (&$r, $tasks, $config) {
     foreach ($all_tasks as $task) {
       $format = <<<EOL
 <div class="%s">
-<p>ID: <a href="http://127.0.0.1:$port/tasks/%s">%s</a><br />
+<p>ID: <a href="http://%s:%s/tasks/%s">%s</a><br />
 Name: %s<br />
 Params: %s<br />
 Status: %s<br />
 Date: %s</p>
 </div>
 EOL;
-      $output .= sprintf($format, $task->getStatus(), $task->getId(), $task->getId(),
+      $output .= sprintf($format, $task->getStatus(),
+          $config['host'], $config['port'], $task->getId(), $task->getId(),
           $task->getName(), json_encode($task->getParams()), $task->getStatus(),
           $task->getCreated());
     }
