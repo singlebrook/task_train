@@ -1,5 +1,6 @@
 {
   "name": "singlebrook/task_train",
+  "description": "A sequential script runner with a teensy REST API",
   "authors": [
     {
       "name": "Jeff Amaral",
