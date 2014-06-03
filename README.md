@@ -55,7 +55,7 @@ or this, for a custom php:
 
 Test it by running the following:
 
-    you@server$ curl http://127.0.0.1:1337/
+    you@server$ curl http://127.0.0.1:5800/
 
 You should see this response:
 
@@ -67,19 +67,19 @@ If the server is running in the background and you need to stop it, you can find
     63565 ttys000    0:00.12 php server.php
     you@server$ kill 63565
 
-By default, the Task Train server listens on 127.0.0.1:1337.
+By default, the Task Train server listens on 127.0.0.1:5800.
 
 ## Submitting tasks
 
-Tasks are submitted via HTTP calls to a local web server running on port 1337 by default. Here are some examples:
+Tasks are submitted via HTTP calls to a local web server running on port 5800 by default. Here are some examples:
 
-    $ curl -X POST "http://127.0.0.1:1337/task?name=example"
-    $ curl -X POST "http://127.0.0.1:1337/task?name=example&myparam=value"
-    $ curl -X POST "http://127.0.0.1:1337/task?name=gitdeploy&branch=newfeature&action=create&repo=/home/git/myrepo.git"
+    $ curl -X POST "http://127.0.0.1:5800/task?name=example"
+    $ curl -X POST "http://127.0.0.1:5800/task?name=example&myparam=value"
+    $ curl -X POST "http://127.0.0.1:5800/task?name=gitdeploy&branch=newfeature&action=create&repo=/home/git/myrepo.git"
 
 A task record will be returned, like so:
 
-    $ curl -X POST "http://127.0.0.1:1337/task?name=example&myparam=testvalue"
+    $ curl -X POST "http://127.0.0.1:5800/task?name=example&myparam=testvalue"
     ID:      538d230405898
     NAME:    example
     PARAMS:  {"myparam":"testvalue"}
@@ -101,7 +101,7 @@ Scripts will be run as the same user that runs the Task Train server. They will 
 
 If the following task is requested:
 
-    curl -sX POST "http://127.0.0.1:1337/task?name=calsdeploy&branch=fitvids&action=create&repo=/home/cals/cals.git"
+    curl -sX POST "http://127.0.0.1:5800/task?name=calsdeploy&branch=fitvids&action=create&repo=/home/cals/cals.git"
 
 And there is a script at `scripts.d/calsdeploy/deploy.php`, that script will be run with these arguments:
 
@@ -115,7 +115,7 @@ The scripts do not need to be written in PHP.
 
 ### Script Output
 
-Any content echoed or printed in a script can be reviewed at http://127.0.0.1:1337/tasks/TASK_ID while the task is running or when it is completed.
+Any content echoed or printed in a script can be reviewed at http://127.0.0.1:5800/tasks/TASK_ID while the task is running or when it is completed.
 
 ### Exit Codes
 
@@ -123,6 +123,6 @@ Scripts must return an exit code of 0 on success. If any other exit code is retu
 
 ## Checking task status
 
-Visit http://127.0.0.1:1337/tasks to see a list of tasks. Currently, the task list is cleared when the server is restarted. You can click on any taks name to see the status of any running or complete task.
+Visit http://127.0.0.1:5800/tasks to see a list of tasks. Currently, the task list is cleared when the server is restarted. You can click on any taks name to see the status of any running or complete task.
 
 ## Proxying

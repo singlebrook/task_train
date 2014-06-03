@@ -11,7 +11,7 @@ $http = new React\Http\Server($socket);
 
 $r = 0;
 $tasks = new Tasktrain\Tasks;
-$port = 1337;
+$port = 5800;
 
 $app = function($request, $response) use (&$r, $tasks, $port) {
   $r++;

@@ -27,10 +27,10 @@ do
   # When updating a branch, both oldrev and newrev are commit SHA references.
 
   if [ "$oldrev" == "0000000000000000000000000000000000000000" ]; then
-    curl -sX POST "http://127.0.0.1:1337/task?name=example&branch=$refname_short&action=create&repo=$repo"
+    curl -sX POST "http://127.0.0.1:5800/task?name=example&branch=$refname_short&action=create&repo=$repo"
   elif [ "$newrev" == "0000000000000000000000000000000000000000" ]; then
-    curl -sX POST "http://127.0.0.1:1337/task?name=example&branch=$refname_short&action=delete&repo=$repo"
+    curl -sX POST "http://127.0.0.1:5800/task?name=example&branch=$refname_short&action=delete&repo=$repo"
   else
-    curl -sX POST "http://127.0.0.1:1337/task?name=example&branch=$refname_short&action=update&repo=$repo"
+    curl -sX POST "http://127.0.0.1:5800/task?name=example&branch=$refname_short&action=update&repo=$repo"
   fi
 done
