@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Submits creation, updating, and deletion of feature branches to the task
+# manager. Rename to post-receive, modify as needed, ensure that it is
+# executable, and place in .git/hooks/
+
+repo=`pwd`
+
+# The post-receive hook receives parameters on stdin. We call them oldrev,
+# newrev, and refname.
+while read oldrev newrev refname
+do
+  refname_short=${refname#refs/heads/}
+
+  #echo "DEBUG: oldrev, newrev, and refname:"
+  #echo $oldrev
+  #echo $newrev
+  #echo $refname
+
+  # Example: Skip deployment of master branch.
+  #if [ "$refname" == "refs/heads/master" ]; then
+  #  continue
+  #fi
+
+  # When adding a branch, oldrev = 0000000000000000000000000000000000000000
+  # When removing a branch, newrev = 0000000000000000000000000000000000000000
+  # When updating a branch, both oldrev and newrev are commit SHA references.
+
+  if [ "$oldrev" == "0000000000000000000000000000000000000000" ]; then
+    curl -sX POST "http://127.0.0.1:1337/task?name=example&branch=$refname_short&action=create&repo=$repo"
+  elif [ "$newrev" == "0000000000000000000000000000000000000000" ]; then
+    curl -sX POST "http://127.0.0.1:1337/task?name=example&branch=$refname_short&action=delete&repo=$repo"
+  else
+    curl -sX POST "http://127.0.0.1:1337/task?name=example&branch=$refname_short&action=update&repo=$repo"
+  fi
+done
