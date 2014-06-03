@@ -23,7 +23,6 @@ $config += array(
 
 $r = 0;
 $tasks = new Tasktrain\Tasks;
-$port = 5800;
 
 $app = function($request, $response) use (&$r, $tasks, $config) {
   $r++;
