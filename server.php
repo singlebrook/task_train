@@ -9,11 +9,23 @@ $loop = React\EventLoop\Factory::create();
 $socket = new React\Socket\Server($loop);
 $http = new React\Http\Server($socket);
 
+// Accept port and host options from command line.
+$config = getopt('', array(
+  'port:',
+  'host:',
+));
+
+// Set default options, if they are not set.
+$config += array(
+  'port' => 5800,
+  'host' => '127.0.0.1',
+);
+
 $r = 0;
 $tasks = new Tasktrain\Tasks;
 $port = 5800;
 
-$app = function($request, $response) use (&$r, $tasks, $port) {
+$app = function($request, $response) use (&$r, $tasks, $config) {
   $r++;
   $method = $request->getMethod();
   $path = $request->getPath();
@@ -85,8 +97,8 @@ EOL;
 
 $http->on('request', $app);
 
-$socket->listen($port);
-echo "Server running at http://127.0.0.1:$port\n";
+$socket->listen($config['port'], $config['host']);
+printf('Server running at http://%s:%s' . PHP_EOL, $config['host'], $config['port']);
 
 // Check for tasks to run every second.
 // TODO: Consider using some sort of emitter if that would consume fewer resources.

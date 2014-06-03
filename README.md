@@ -69,6 +69,14 @@ If the server is running in the background and you need to stop it, you can find
 
 By default, the Task Train server listens on 127.0.0.1:5800.
 
+### Running on another host and/or port
+
+You can run the server on a different host or port with the `--port` and `--host` options. They are not required, and default to port `5800` and host `127.0.0.1`.
+
+In this example, the port is changed to `1337` and the server will listen on any interface, rather than the default loopback address. This makes the server accessible from the outside world, although that's not recommended.
+
+    you@server$ php server.php --port=1337 --host=0.0.0.0
+
 ## Submitting tasks
 
 Tasks are submitted via HTTP calls to a local web server running on port 5800 by default. Here are some examples:
